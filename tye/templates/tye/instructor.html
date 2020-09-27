@@ -1,0 +1,14 @@
+
+{% extends 'tye/base.html'%}
+{% block content %}
+    <h1>Instructors</h1>
+
+        {% for instructor in instructors %}
+                <h2>{{ instructor.name }}</h2>
+                <p> Instructor </p>
+                <p>{{ instructor.bio}} </p>
+        
+        {% endfor %}
+  
+    
+{% endblock content %}

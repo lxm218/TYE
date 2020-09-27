@@ -1,0 +1,23 @@
+
+{% extends 'tye/base.html'%}
+{% block content %}
+    <h1>Our Fall Class List (Sep 21 - Nov 29, 2020)</h1>
+  
+    {% for course in courses %}
+        <div class="content-section">
+            <div class="media">
+                <img style="object-fit: cover" src="{{ course.image.url }}">
+                <div class="media-body">
+                    <h2>{{ course.name }}</h2>
+                    <p>Instructor: {{ course.instructor }} 
+                    <p>Schedule: {{ course.date }} at {{ course.time}}</p>
+                    <p>Age Group: {{ course.age }}</p>
+                    <p>Prerequsites: {{ course.prerequisite }}</p>
+                    <p>Materials: {{ course.material }}</p>
+                    <p>Description: {{ course.description }}
+                </div>
+            </div>
+        </div>          
+    {% endfor %}
+{% endblock content %}
+

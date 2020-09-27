@@ -1,0 +1,20 @@
+
+{% extends 'tye/base.html'%}
+{% block content %}
+    <h1>TYE Guest Speaker Series</h1>
+  
+    {% for event in events %}
+        <div class="content-section">
+            <div class="media">
+                <img style="float:lef" width=320px hight=600px src="{{ event.image.url }}">
+                <div class="media-body">
+                    <h2>{{ event.title }}</h2>
+                    <p>Speaker: {{ event.speaker }}
+                    <p>When: {{ event.date }} 
+                    <p>Where: {{ event.location }}</p>
+                    <p>Topic: {{ event.description}}
+                </div>
+            </div>
+        </div>          
+    {% endfor %}
+{% endblock content %}

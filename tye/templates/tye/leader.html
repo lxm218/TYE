@@ -1,0 +1,19 @@
+{% extends 'tye/base.html'%}
+{% block content %}
+    <h1>Our Leadership Team</h1>
+    {% for instructor in instructors %}
+        {% if instructor.leader is True %}
+            <div class="content-section">
+                <div class="media">
+                    <img class="rounded-circle account-img" src="{{ instructor.image.url }}">
+                    <div class="media-body">
+                        <h2 class="account-heading">{{ instructor.name }}</h2>
+                        <p class="text-secondary">{{ instructor.title }}</p>
+                    </div>
+                </div>
+            </div>  
+        {% endif %}        
+    {% endfor %}
+{% endblock content %}
+
+    
