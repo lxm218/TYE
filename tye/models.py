@@ -30,6 +30,7 @@ class Instructor(models.Model):
     age = models.CharField(max_length=50)   
     bio = models.TextField()
     image = models.ImageField(default='default.jpg',upload_to='instructor_pics')
+    active_status = models.BooleanField(default=False)
 
    
     def __str__(self):
@@ -39,6 +40,7 @@ class Instructor(models.Model):
 
 class Session(models.Model):
     sessionName = models.CharField(max_length=50)
+    active_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.sessionName

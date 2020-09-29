@@ -4,9 +4,11 @@
     <h1>Instructors</h1>
 
         {% for instructor in instructors %}
-                <h2>{{ instructor.name }}</h2>
-                <p> Instructor </p>
-                <p>{{ instructor.bio}} </p>
+                {% if instructor.active_status is True %}
+                        <h2>{{ instructor.name }}</h2>
+                        <p> Instructor </p>
+                        <p>{{ instructor.bio}} </p>
+                {% endif %}
         
         {% endfor %}
   
