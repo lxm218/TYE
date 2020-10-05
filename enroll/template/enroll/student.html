@@ -1,7 +1,8 @@
 {% extends "tye/base.html" %}
 
 {% block content %}
-  
-  <h2 class="account-heading">{{ student.name }}</h2>
+    
+    <h2>{% user.student_set.all() %}</h2>
+   
  
 {% endblock content %}

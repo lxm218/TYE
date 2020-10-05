@@ -56,18 +56,4 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
-class Student(models.Model):
-    name = models.CharField(max_length=100)
-    user = models.ForeignKey(User, null = True , on_delete=models.CASCADE)
-    email = models.EmailField(max_length=254)
-    school = models.CharField(max_length=50)
-    state = models.CharField(max_length=2)
-    country = models.CharField(max_length=50, default='USA')
-    grade = models.CharField(max_length=2)   
-  
 
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        super().save()

@@ -9,5 +9,4 @@ urlpatterns = [
     path('team/instructor', views.instructor, name='tye-instructor'),
     path('class/', views.course, name='tye-class'),
     path('event/', views.event, name='tye-event'),
-    path('student/', views.student, name='tye-student'),
 ]

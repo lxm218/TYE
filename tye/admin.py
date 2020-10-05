@@ -1,5 +1,5 @@
 from django.contrib import admin
-#from .models import Course, Instructor,Session
+from .models import Course, Instructor,Session
 
 # Register your models here.
 
