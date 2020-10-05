@@ -7,6 +7,8 @@ from PIL import Image
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
+    
     
     def __str__(self):
         return f'{self.user.username} Profile'  
@@ -21,18 +23,7 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)    
 
-class Student(models.Model):
-    name = models.CharField(max_length=100)
-    parent = models.ForeignKey(User, default = "" , on_delete=models.CASCADE)
-    email = models.EmailField(max_length=254)
-    school = models.CharField(max_length=50)
-    state = models.CharField(max_length=2)
-    country = models.CharField(max_length=50, default='USA')
-    grade = models.CharField(max_length=2)   
-  
 
-    def __str__(self):
-        return self.name
 
 
    
