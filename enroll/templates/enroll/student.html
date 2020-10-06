@@ -1,0 +1,14 @@
+{% extends "tye/base.html" %}
+{% block content %}   
+    <h2>My Students</h2>
+
+    {% for student in students %}
+     
+        <a class="btn btn-outline-secondary" href="{% url 'student-detail' student.id %}">{{ student.name }}</a>
+        
+    {% endfor %}
+    
+    <div>
+        <a class="nav-item nav-link" href="{% url 'profile' %}">Back to Parent Profile </a>
+    </div>
+{% endblock content %}

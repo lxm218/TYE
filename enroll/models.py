@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 class Student(models.Model):
@@ -15,5 +16,5 @@ class Student(models.Model):
     def __str__(self):
         return self.name
 
-    #def get_absolute_url(self):
-        #return reverse('student-detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('student-detail', kwargs={'pk': self.pk})

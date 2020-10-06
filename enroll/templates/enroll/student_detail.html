@@ -1,0 +1,26 @@
+{% extends "tye/base.html" %}
+{% block content %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{% url 'profile' %}">{{ object.parent }}</a>
+        
+        {% if object.parent == user %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'student-delete' object.id %}">Delete</a>
+          </div>
+        {% endif %}
+      </div>
+      <h2 class="article-title">{{ object.name }}</h2>
+        <div class="form-group">
+            <p>Email: {{ object.email }}</p>
+            <p>School: {{ object.school }}</p>
+            <p>State: {{ object.state }}</p>
+            <p>Country: {{ object.country }}</p>
+            <p>Grade: {{ object.grade}}</p>
+        </div>
+    
+    </div>
+  </article>
+{% endblock content %}

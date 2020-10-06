@@ -1,25 +1,59 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from .forms import StudentCreateForm
+#from django.contrib.auth.decorators import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Student
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
+
 
 # Create your views here.
-@login_required
-def student(request):
-    if request.method == 'POST':
-        s_form = StudentCreateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.student)
-        if s_form.is_valid() and u_form.is_valid():
-            u_form.save()
-            s_form.save()
-            messages.success(request, f'Your student has been added!')
-            return redirect('student')
+class StudentListView(ListView):
+    model = Student
+    template_name = 'enroll/student.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'students'
+    #ordering = ['-date_posted']
 
-    else:
-        s_form = StudentCreateForm(instance=request.user.student)
 
-    context = {
-        's_form': s_form
-    }
-    return render(request, 'student.html',context)
+class StudentDetailView(DetailView):
+    model = Student
+
+
+class StudentCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Student
+    fields = ['name','parent','email','school','state','country','grade']
+
+    def form_valid(self, form):
+        form.instance.parent= self.request.user
+        return super().form_valid(form)
+
+
+class StudentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Student
+    fields = ['name','parent','email','school','state','country','grade']
+
+    def form_valid(self, form):
+        form.instance.parent = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        student = self.get_object()
+        if self.request.user == student.parent:
+            return True
+        return False
+
+
+class StudentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Student
+    success_url = '/'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == student.parent:
+            return True
+        return False
+
