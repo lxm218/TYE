@@ -1,14 +1,21 @@
 {% extends "tye/base.html" %}
 {% block content %}   
-    <h2>My Students</h2>
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <h3>My Students</h3>
+            </div>
 
-    {% for student in students %}
-     
-        <a class="btn btn-outline-secondary" href="{% url 'student-detail' student.id %}">{{ student.name }}</a>
-        
-    {% endfor %}
-    
+            {% for student in students %}
+                <p>Student: {{ student.id }}</p><a class="nav-item nav-link" href="{% url 'student-detail' student.id %}">{{ student.name }}</a>    
+            {% endfor %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student-create'%}">Add Student</a>       
+            </div>
+        </div>
+    </article>
     <div>
-        <a class="nav-item nav-link" href="{% url 'profile' %}">Back to Parent Profile </a>
+        <a class="nav-item nav-link" href="{% url 'profile' %}">Back to Account </a>
     </div>
+        
 {% endblock content %}
