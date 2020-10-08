@@ -11,24 +11,27 @@ from django.views.generic import (
 
 
 # Create your views here.
-class StudentListView(ListView):
+class StudentListView(LoginRequiredMixin,ListView):
     model = Student
     template_name = 'enroll/student.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'students'
     ordering = ['id']
 
+ 
 
-class StudentDetailView(DetailView):
+class StudentDetailView(LoginRequiredMixin,DetailView):
     model = Student
 
+  
 
-class StudentCreateView(LoginRequiredMixin,CreateView):
+class StudentCreateView(LoginRequiredMixin,  CreateView):
     model = Student
     fields = ['name','email','school','state','country','grade']
 
     def form_valid(self, form):
         form.instance.parent= self.request.user
         return super().form_valid(form)
+
 
 
 class StudentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

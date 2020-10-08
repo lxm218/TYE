@@ -3,23 +3,24 @@
   <article class="media content-section">
     <div class="media-body">
       <div class="article-metadata">
-        <h3><a class="mr-2" href="{% url 'profile' %}">{{ object.parent }}</a></h3> 
-       
+          <h4><a class="mr-2" >Student Profile</a></h4> 
       </div>
-      <h4 class="article-title">{{ object.name }}</h4>
+      {% if object.parent == user %}
         <div class="form-group">
+            <p class="article-title">Student Name: {{ object.name }}</p>
             <p>Email: {{ object.email }}</p>
             <p>School: {{ object.school }}</p>
             <p>State: {{ object.state }}</p>
             <p>Country: {{ object.country }}</p>
             <p>Grade: {{ object.grade}}</p>
         </div>
-        {% if object.parent == user %}
-          <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student-update' object.id %}">Update</a>
-            
-          </div>
-        {% endif %}
+        
+        <div>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student-update' object.id %}">Update</a>
+        </div>
+      {% else %}
+        <p><a class="btn btn-outline-danger" >You don't have this student</a></p> 
+      {% endif %}
 
     
     </div>

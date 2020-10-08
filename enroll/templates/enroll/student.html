@@ -3,12 +3,13 @@
     <article class="media content-section">
         <div class="media-body">
             <div class="article-metadata">
-                <h3>My Students</h3>
+                <h4>My Students</h4>
             </div>
-
-            {% for student in students %}
-                <p>Student: {{ student.id }}</p><a class="nav-item nav-link" href="{% url 'student-detail' student.id %}">{{ student.name }}</a>    
-            {% endfor %}
+                {% for student in students %}
+                    {% if student.parent == user %}
+                       <a class="nav-item nav-link" href="{% url 'student-detail' student.id %}">{{ student.name }}</a> 
+                    {% endif %}   
+                {% endfor %}          
             <div>
                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student-create'%}">Add Student</a>       
             </div>
