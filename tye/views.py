@@ -23,7 +23,7 @@ def leader(request):
 
 def instructor(request):
     context = {
-        'instructors': Instructor.objects.all()
+        'instructors': Instructor.objects.filter(course__instructor__isnull=False)
     }
     return render(request, 'tye/instructor.html',context)
 

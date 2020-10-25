@@ -13,14 +13,9 @@ class Course(models.Model):
     description = models.TextField()
     session = models.ForeignKey('Session', default=1, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg',upload_to='course_pics')
-
-
-  
         
     def __str__(self):
         return self.name
-
-    
 
 class Instructor(models.Model):
     name = models.CharField(max_length=100)
@@ -32,12 +27,9 @@ class Instructor(models.Model):
     image = models.ImageField(default='default.jpg',upload_to='instructor_pics')
     active_status = models.BooleanField(default=False)
 
-   
     def __str__(self):
         return self.name
     
-   
-
 class Session(models.Model):
     sessionName = models.CharField(max_length=50)
     active_status = models.BooleanField(default=False)
