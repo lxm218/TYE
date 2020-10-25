@@ -23,6 +23,7 @@ def leader(request):
 
 def instructor(request):
     context = {
+        # doc, https://docs.djangoproject.com/en/3.1/topics/db/queries/#lookups-that-span-relationships
         'instructors': Instructor.objects.filter(course__instructor__isnull=False)
     }
     return render(request, 'tye/instructor.html',context)

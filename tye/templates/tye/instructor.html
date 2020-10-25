@@ -8,7 +8,12 @@
                         <img class="rounded-circle account-img" src="{{ instructor.image.url }}">
                             <div class="media-body">
                                 <h2 class="account-heading">{{ instructor.name }}</h2>
-                                <p> {{ course.name }}Instructor </p>
+                                {% for course in instructor.course_set.all %}
+                                <hr>
+                                <p> 
+                                    {{ course.name }} ,  
+                                </p>
+                                {% endfor %}
                                 <p class="text-secondary">{{ instructor.bio }}</p>
                             </div>
                     </div>
