@@ -7,11 +7,12 @@ class Course(models.Model):
     instructor = models.ForeignKey('Instructor',default=1, on_delete=models.CASCADE)
     date = models.CharField(max_length=50)
     time = models.CharField(max_length=50)
-    age = models.IntegerField()
+    age = models.CharField(max_length=50)
     prerequisite = models.CharField(max_length=50)
     material = models.CharField(max_length=50)
     description = models.TextField()
     session = models.ForeignKey('Session', default=1, on_delete=models.CASCADE)
+    price = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg',upload_to='course_pics')
    
 
