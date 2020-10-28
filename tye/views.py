@@ -27,17 +27,19 @@ def instructor(request):
     }
     return render(request, 'tye/instructor.html',context)
 
-def course(request):
-    context = {
-        'courses': Course.objects.all()
-    }
-    return render(request, 'tye/class.html',context)
 
 def event(request):
     context = {
         'events': Event.objects.all()
     }
     return render(request, 'tye/event.html',context)
+
+def course(request):
+    context = {
+        'courses': Course.objects.all()
+    }
+
+    return render(request, 'tye/class.html',context)
 
 
 

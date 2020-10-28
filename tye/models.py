@@ -7,15 +7,14 @@ class Course(models.Model):
     instructor = models.ForeignKey('Instructor',default=1, on_delete=models.CASCADE)
     date = models.CharField(max_length=50)
     time = models.CharField(max_length=50)
-    age = models.CharField(max_length=50)
+    age = models.IntegerField()
     prerequisite = models.CharField(max_length=50)
     material = models.CharField(max_length=50)
     description = models.TextField()
     session = models.ForeignKey('Session', default=1, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg',upload_to='course_pics')
+   
 
-
-  
         
     def __str__(self):
         return self.name
@@ -27,7 +26,7 @@ class Instructor(models.Model):
     leader = models.BooleanField(null=False)
     title =  models.CharField(max_length=50, default="")
     school = models.CharField(max_length=50)
-    age = models.CharField(max_length=50)   
+    age = models.IntegerField()   
     bio = models.TextField()
     image = models.ImageField(default='default.jpg',upload_to='instructor_pics')
     active_status = models.BooleanField(default=False)

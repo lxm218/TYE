@@ -50,3 +50,4 @@ class StudentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 
+

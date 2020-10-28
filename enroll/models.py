@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from tye.models import Course
 
 # Create your models here.
 class Student(models.Model):
@@ -10,7 +11,7 @@ class Student(models.Model):
     school = models.CharField(max_length=50)
     state = models.CharField(max_length=2)
     country = models.CharField(max_length=50, default='USA')
-    grade = models.CharField(max_length=2)   
+    grade = models.CharField(max_length=2)  
   
 
     def __str__(self):
@@ -18,3 +19,9 @@ class Student(models.Model):
 
     def get_absolute_url(self):
         return reverse('student-detail', kwargs={'pk': self.pk})
+
+
+
+
+
+  
