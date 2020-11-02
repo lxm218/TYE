@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 #from django.contrib.auth.decorators import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Student
+from .models import Student, OrderCourse, Order
+from tye.models import Course
+from django.utils import timezone
+from django.contrib import messages
 from django.views.generic import (
     ListView,
     DetailView,
@@ -50,4 +53,22 @@ class StudentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 
+def add_to_cart(request,slug):
+    course = get_object_or_404(Course, slug=slug)
+    order_course = OrderCourse.objects.create(course = course)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.courses.filter(course_slug=course.slug).exists():
+            order_course.quantity += 1
+            order_course.save()
+        else:
+            order.courses.add(order_course)
+            messages.info(request,"this course was added to your cart")
+            return redirect('order-summary')
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(user = request.user, ordered_date=ordered_date)
+        order.courses.add(order_course)
 
+    return redirect('tye:tye-class', slug = slug)

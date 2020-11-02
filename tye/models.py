@@ -1,6 +1,8 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
+from enroll.models import Student, OrderCourse, Order
 
 class Course(models.Model):
     name = models.CharField(max_length=100)
@@ -13,12 +15,20 @@ class Course(models.Model):
     description = models.TextField()
     session = models.ForeignKey('Session', default=1, on_delete=models.CASCADE)
     price = models.IntegerField(default=0)
+    slug = models.SlugField()
     image = models.ImageField(default='default.jpg',upload_to='course_pics')
    
-
         
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('tye-class', kwargs={'slug': self.slug})
+
+    def get_add_to_cart_url(self):
+        return reverse ('enroll: add-to-cart', kwargs={
+            'slug': self.slug
+        })
 
     
 
